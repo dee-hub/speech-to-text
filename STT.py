@@ -68,9 +68,10 @@ with col2:
                 transcribed_text = ""
   
                 while bool(dic.get('results')):
-                    transcribed_text = dic.get('results').pop().get('alternatives').pop().get('transcript')+transcribed_text[:]
                     latest_iteration.text(f'Iteration {i}')
                     bar.progress(i)
+                    transcribed_text = dic.get('results').pop().get('alternatives').pop().get('transcript')+transcribed_text[:]
+               
                     i+=1
                 text = st.text_area("Results", transcribed_text, height=300)
                 st.download_button(label="Download Transcript", data=transcribed_text, file_name="transcript.text")
