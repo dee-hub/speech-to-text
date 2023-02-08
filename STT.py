@@ -61,14 +61,13 @@ with col2:
                         smart_formatting = True,
                         speaker_labels = True,
                         model=model_type).get_result(), indent=2))
-                    st.success('Done!')
+                    st.success('Transcription Successful!')
   
 # Stores the transcribed text
                 transcribed_text = ""
                 with st.spinner('Retrieving transcribed text...'):
                     while bool(dic.get('results')):
                          transcribed_text = dic.get('results').pop().get('alternatives').pop().get('transcript')+transcribed_text[:]
-                    st.success('Done!')
                 text = st.text_area("Results", transcribed_text, height=300)
                 st.download_button(label="Download Transcript", data=transcribed_text, file_name="transcript.text")
     
