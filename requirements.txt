@@ -1,5 +1,4 @@
 ibm_watson
-os
 json
 numpy
 pandas
