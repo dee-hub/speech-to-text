@@ -63,6 +63,7 @@ with col2:
                     smart_formatting = True,
                     speaker_labels = True,
                     model=model_type).get_result(), indent=2))
+                print(dic)
   
 # Stores the transcribed text
                 transcribed_text = ""
