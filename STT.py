@@ -10,7 +10,7 @@ from ibm_watson import SpeechToTextV1
 from ibm_watson.websocket import RecognizeCallback, AudioSource
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 import os
-
+st.session_state()
 st.set_page_config(
         page_title="VoiceCaption: Turn your words into text with VoiceCaption - Effortlessly transcribe, simplify and preserve your thoughts.",
         page_icon="🎤",
@@ -19,6 +19,15 @@ st.set_page_config(
     )
 col1, col2= st.columns([4, 6])
 local_css("style.css")
+
+def authenticate():
+    authenticator = IAMAuthenticator(st.secrets["authenticator"]) 
+    service = SpeechToTextV1(authenticator = authenticator)
+    #Insert URL in place of 'API_URL' 
+    service.set_service_url(st.secrets["url"])
+        
+    return service
+st.cache(authenticate)
 with col1:
     from PIL import Image
     image = Image.open('stt.png')
@@ -31,14 +40,11 @@ with col2:
     st.markdown(meta.HEADER_INFO, unsafe_allow_html=True)
     st.markdown(meta.CHEF_INFO, unsafe_allow_html=True)
     audio_lang = st.selectbox("Choose your audio file language", index=0, options=["English", "French", "German"])
-    authenticator = IAMAuthenticator(st.secrets["authenticator"]) 
-    service = SpeechToTextV1(authenticator = authenticator)
-    #Insert URL in place of 'API_URL' 
-    service.set_service_url(st.secrets["url"])
+    
 
     if audio_lang == "English":
         model_type = "en-US_BroadbandModel"
-        uploaded_file = st.file_uploader("Choose a file")
+        uploaded_file = st.file_uploader("Choose a file", key='files')
         if uploaded_file is not None:
             file = split_tup = os.path.splitext(uploaded_file.name)
             file = file[1].replace(".", "")
@@ -49,7 +55,7 @@ with col2:
                 # Insert local mp3 file path in
                 # place of 'LOCAL FILE PATH' 
                 dic = json.loads(
-                    json.dumps(service.recognize(audio=uploaded_file,
+                    json.dumps(authenticate().recognize(audio=uploaded_file,
                     content_type=audio_type,   
                     word_alternatives_threshold=0.9,
                     smart_formatting = True,
