@@ -31,6 +31,11 @@ with col2:
     st.markdown(meta.HEADER_INFO, unsafe_allow_html=True)
     st.markdown(meta.CHEF_INFO, unsafe_allow_html=True)
     audio_lang = st.selectbox("Choose your audio file language", index=0, options=["English", "French", "German"])
+    authenticator = IAMAuthenticator(st.secrets["authenticator"]) 
+    service = SpeechToTextV1(authenticator = authenticator)
+    #Insert URL in place of 'API_URL' 
+    service.set_service_url(st.secrets["url"])
+
     if audio_lang == "English":
         model_type = "en-US_BroadbandModel"
         uploaded_file = st.file_uploader("Choose a file")
@@ -41,13 +46,8 @@ with col2:
             audio_type = "audio/" + str(file)
             transcribe = st.button('Transcribe 💡')
             if transcribe:
-                authenticator = IAMAuthenticator(st.secrets["authenticator"]) 
-                service = SpeechToTextV1(authenticator = authenticator)
-                #Insert URL in place of 'API_URL' 
-                service.set_service_url(st.secrets["url"])
-   
-# Insert local mp3 file path in
-# place of 'LOCAL FILE PATH' 
+                # Insert local mp3 file path in
+                # place of 'LOCAL FILE PATH' 
                 dic = json.loads(
                     json.dumps(service.recognize(audio=uploaded_file,
                     content_type=audio_type,   
