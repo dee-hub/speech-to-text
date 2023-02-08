@@ -43,10 +43,10 @@ with col2:
             audio_type = "audio/" + str(file)
             transcribe = st.button('Transcribe 💡')
             if transcribe:
-                authenticator = IAMAuthenticator('ZR0ezUX8ya6f7OyD7925PT5Fzo_KXPTM2SsPdDtTFCFv') 
+                authenticator = IAMAuthenticator(st.secrets["authenticator"]) 
                 service = SpeechToTextV1(authenticator = authenticator)
                 #Insert URL in place of 'API_URL' 
-                service.set_service_url('https://api.eu-gb.speech-to-text.watson.cloud.ibm.com/instances/8b859d1a-bb0b-4781-b977-68e119f5a9fd')
+                service.set_service_url(st.secrets["url"])
    
 # Insert local mp3 file path in
 # place of 'LOCAL FILE PATH' 
