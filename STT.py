@@ -4,14 +4,12 @@ import pandas as pd
 import numpy as np
 import meta
 from utils.st import (remote_css, local_css,)
-import openai
 import json
 from os.path import join, dirname
 from ibm_watson import SpeechToTextV1
 from ibm_watson.websocket import RecognizeCallback, AudioSource
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 import os
-import pathlib
 
 st.set_page_config(
         page_title="VoiceCaption: Turn your words into text with VoiceCaption - Effortlessly transcribe, simplify and preserve your thoughts.",
