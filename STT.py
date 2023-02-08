@@ -49,8 +49,11 @@ with col2:
             file = file[1].replace(".", "")
             #print(file)
             audio_type = "audio/" + str(file)
-            transcribe = st.button('Transcribe 💡')
+            transcribe = st.button('Transcribe 💡')       
             if transcribe:
+                latest_iteration = st.empty()
+                bar = st.progress(0)
+                i = 0
                 # Insert local mp3 file path in
                 # place of 'LOCAL FILE PATH' 
                 dic = json.loads(
@@ -66,6 +69,9 @@ with col2:
   
                 while bool(dic.get('results')):
                     transcribed_text = dic.get('results').pop().get('alternatives').pop().get('transcript')+transcribed_text[:]
+                    latest_iteration.text(f'Iteration {i}')
+                    bar.progress(i)
+                    i+=1
                 text = st.text_area("Results", transcribed_text, height=300)
                 st.download_button(label="Download Transcript", data=transcribed_text, file_name="transcript.text")
     
