@@ -51,9 +51,6 @@ with col2:
             audio_type = "audio/" + str(file)
             transcribe = st.button('Transcribe 💡')       
             if transcribe:
-                latest_iteration = st.empty()
-                bar = st.progress(0)
-                i = 0
                 # Insert local mp3 file path in
                 # place of 'LOCAL FILE PATH' 
                 with st.spinner('Transcription in progress...'):
