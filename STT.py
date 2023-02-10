@@ -59,7 +59,9 @@ with col2:
             sound.export(output_file, format="wav")
             uploaded_file = output_file
             audio_type = "audio/wav"
-        st.audio(uploaded_file.name, format=audio_type)
+            st.audio(uploaded_file, format=audio_type)
+        else:
+            st.audio(uploaded_file.name, format=audio_type)
         transcribe = st.button('Transcribe 💡')       
         if transcribe:
                 # Insert local mp3 file path in
