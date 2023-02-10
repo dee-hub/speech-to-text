@@ -40,9 +40,9 @@ with col2:
     st.markdown(meta.CHEF_INFO, unsafe_allow_html=True)
     audio_lang = st.selectbox("Choose your audio file language", index=0, options=["British English", "American English"])
     if audio_lang == "British English":
-        audio_model = st.selectbox("Choose your preferred model for transcription", index=2, options=["en-GB_BroadbandModel", "en-GB_Multimedia", "en-GB_NarrowbandModel", "en-GB_Telephony"])
+        audio_model = st.selectbox("Choose your preferred model for transcription", index=0, options=["en-GB_BroadbandModel", "en-GB_Multimedia", "en-GB_NarrowbandModel", "en-GB_Telephony"])
     elif audio_lang == "American English":
-        audio_model = st.selectbox("Choose your preferred model for transcription", index=2, options=["en-US_BroadbandModel", "en-US_Multimedia", "en-US_NarrowbandModel", "en-US_ShortForm_NarrowbandModel", "en-US_Telephony"])
+        audio_model = st.selectbox("Choose your preferred model for transcription", index=0, options=["en-US_BroadbandModel", "en-US_Multimedia", "en-US_NarrowbandModel", "en-US_ShortForm_NarrowbandModel", "en-US_Telephony"])
     
     uploaded_file = st.file_uploader("Choose a file", key='files')
     if uploaded_file is not None:
