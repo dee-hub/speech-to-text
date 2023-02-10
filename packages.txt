@@ -3,4 +3,3 @@ xclip
 xsel
 wl-clipboard
 ffmpeg
-python-pydub
