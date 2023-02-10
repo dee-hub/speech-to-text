@@ -49,7 +49,7 @@ with col2:
             file = file[1].replace(".", "")
             #print(file)
             audio_type = "audio/" + str(file)
-            st.audio(uploaded_file.name, format=audio_type, key='audio')
+            st.audio(uploaded_file.name, format=audio_type)
             transcribe = st.button('Transcribe 💡')       
             if transcribe:
                 # Insert local mp3 file path in
