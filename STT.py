@@ -56,7 +56,7 @@ with col2:
                 # Insert local mp3 file path in
                 # place of 'LOCAL FILE PATH' 
             with st.spinner('Transcription in progress...'):
-                dic = json.loads(json.dumps(authenticate().recognize(audio=uploaded_file, content_type=audio_type, word_alternatives_threshold=0.9, smart_formatting = True, speaker_labels = True, model=model_type).get_result(), indent=2))
+                dic = json.loads(json.dumps(authenticate().recognize(audio=uploaded_file, content_type=audio_type, word_alternatives_threshold=0.9, smart_formatting = True, speaker_labels = True, model=audio_model).get_result(), indent=2))
             st.success('Transcription Successful!')
   
 # Stores the transcribed text
