@@ -53,7 +53,7 @@ with col2:
             #print(file)
         audio_type = "audio/" + str(file)
         if file == "mp3":
-            input_file = uploaded_file.name
+            input_file = uploaded_file
             output_file = str(split_tup[0]) + ".wav"
             sound = AudioSegment.from_mp3(input_file)
             sound.export(output_file, format="wav")
