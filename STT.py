@@ -10,6 +10,8 @@ from ibm_watson import SpeechToTextV1
 from ibm_watson.websocket import RecognizeCallback, AudioSource
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 import os
+from pydub import AudioSegment
+
 st.set_page_config(
         page_title="VoiceCaption: Turn your words into text with VoiceCaption - Effortlessly transcribe, simplify and preserve your thoughts.",
         page_icon="🎤",
@@ -50,6 +52,13 @@ with col2:
         file = file[1].replace(".", "")
             #print(file)
         audio_type = "audio/" + str(file)
+        if file == "mp3":
+            input_file = uploaded_file.name
+            output_file = str(split_tup[0]) + ".wav"
+            sound = AudioSegment.from_mp3(input_file)
+            sound.export(output_file, format="wav")
+            uploaded_file = output_file
+            audio_type = "audio/wav"
         st.audio(uploaded_file.name, format=audio_type)
         transcribe = st.button('Transcribe 💡')       
         if transcribe:
